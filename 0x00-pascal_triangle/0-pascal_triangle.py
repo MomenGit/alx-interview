@@ -2,7 +2,7 @@
 """Defines pascal_triangle function"""
 
 
-def pascal_triangle(n: int) -> list[list[int]]:
+def pascal_triangle(n):
     """
     returns a list of lists of integers
     representing the Pascal's triangle of n
