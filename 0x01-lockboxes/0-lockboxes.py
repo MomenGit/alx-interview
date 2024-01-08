@@ -2,10 +2,7 @@
 """Defines canUnlockAll function"""
 
 
-from sympy import true
-
-
-def canUnlockAll(boxes: list[list]):
+def canUnlockAll(boxes):
     """
     You have n number of locked boxes in front of you.
     Each box is numbered sequentially from 0 to n - 1
@@ -29,7 +26,7 @@ def canUnlockAll(boxes: list[list]):
             allKeys.add(key)
             newKeys.add(key)
             usedKeys.add(key)
-        loop = true
+        loop = True
         while loop:
             for key in newKeys:
                 for newKey in boxes[key]:
