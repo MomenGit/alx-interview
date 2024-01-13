@@ -2,6 +2,16 @@
 """Defines canUnlockAll function"""
 
 
+def traverse(currentBox, boxes, unlockedBoxes):
+    """Recursively traverse unlocked boxes"""
+    for key in currentBox:
+        if len(unlockedBoxes) == len(boxes):
+            break
+        if 0 <= key < len(boxes) and not unlockedBoxes.__contains__(key):
+            unlockedBoxes.add(key)
+            traverse(boxes[key], boxes, unlockedBoxes)
+
+
 def canUnlockAll(boxes):
     """
     You have n number of locked boxes in front of you.
@@ -17,24 +27,11 @@ def canUnlockAll(boxes):
         Default: False
         True, if all the boxes can be opened
     """
-    allUnlocked = False
+    allUnlocked = True
     if boxes:
-        allKeys = set()
-        usedKeys = set()
-        newKeys = set()
-        for key in boxes[0]:
-            allKeys.add(key)
-            newKeys.add(key)
-            usedKeys.add(key)
-        loop = True
-        while loop:
-            for key in newKeys:
-                for newKey in boxes[key]:
-                    allKeys.add(newKey)
-            if len(allKeys) >= len(boxes)-1:
-                allUnlocked = True
-            newKeys = allKeys.difference(usedKeys)
-            usedKeys = allKeys.copy()
-            loop = len(newKeys) != 0
+        unlockedBoxes = set()
+        unlockedBoxes.add(0)
+        traverse(boxes[0], boxes, unlockedBoxes)
+        allUnlocked = len(unlockedBoxes) == len(boxes)
 
     return allUnlocked
