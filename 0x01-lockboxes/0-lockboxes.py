@@ -5,11 +5,14 @@
 def traverse(currentBox, boxes, unlockedBoxes):
     """Recursively traverse unlocked boxes"""
     for key in currentBox:
-        if len(unlockedBoxes) == len(boxes):
+        try:
+            if len(unlockedBoxes) == len(boxes):
+                break
+            if 0 <= key < len(boxes) and not unlockedBoxes.__contains__(key):
+                unlockedBoxes.add(key)
+                traverse(boxes[key], boxes, unlockedBoxes)
+        except RecursionError:
             break
-        if 0 <= key < len(boxes) and not unlockedBoxes.__contains__(key):
-            unlockedBoxes.add(key)
-            traverse(boxes[key], boxes, unlockedBoxes)
 
 
 def canUnlockAll(boxes):
